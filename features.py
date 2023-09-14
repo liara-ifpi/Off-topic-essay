@@ -1,5 +1,4 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from scipy.spatial.distance import cosine
 
 import pandas as pd
 
