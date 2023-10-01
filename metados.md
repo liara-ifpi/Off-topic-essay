@@ -10,4 +10,4 @@
 5. **Texto com menos de 7 linhas:** A redação precisa ter no mínimo sete linhas para ser avaliada. Qualquer coisa abaixo disso receberá nota zero.
 6. **Fuga à estrutura textual:** A redação do ENEM deve seguir uma estrutura dissertativo-argumentativa, composta por introdução, desenvolvimento e conclusão. Ignorar essa estrutura pode resultar em nota zero.
 7. **Redação em forma de poema ou narração:** O ENEM exige uma redação no formato dissertativo-argumentativo. Portanto, redações em forma de poema, narração ou outro gênero textual não serão avaliadas e receberão nota zero.
-8. **Redação ilegível:** Se a redação for ilegível e impossível de ser avaliada, também receberá nota zero. É importante escrever de forma clara e legível.
+
