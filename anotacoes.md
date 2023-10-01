@@ -2,6 +2,7 @@
 
 * pelo que entendi o *resultadosinit.xlsx* é o resultado das similariedades(certo?), mas faltou o prompt para a identicarção da notas delas
 
+* criar mais uma coluna para uso de identificar para o motivo das redações terem obtido zero
 
 * para a comparação eu pensei em usar os resultados e joga-los em um modelo de maquina com `scikit-learn `
 * li algumas coisas por ai e cheguei a pensar sobre os possiveis metados abaixo:
