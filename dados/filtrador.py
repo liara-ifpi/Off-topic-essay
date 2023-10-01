@@ -5,7 +5,7 @@ import pandas as pd
 
 
 # tabela = pd.read_excel("essay-br.xlsx", engine='openpyxl') # variavel recebe a planilha junto com outra biblioteca para leitura e modificaçao
-tabela = pd.read_csv("../essays/essay-br.csv", converters={'essay': eval, 'competence': eval}) # variavel recebe a planilha junto com outra biblioteca para leitura e modificaçao
+tabela = pd.read_csv("essays/essay-br.csv", converters={'essay': eval, 'competence': eval}) # variavel recebe a planilha junto com outra biblioteca para leitura e modificaçao
 
 filtrados = tabela['score'] == 0 # a variavel filtrados recebe a tabela com parametros 
 
