@@ -1,3 +1,4 @@
+from math import e
 import re
 import pandas as pd
 
@@ -23,24 +24,25 @@ if __name__ == "__main__":
         prompt_id = row['prompt']
 
         # mapeia o id do arquivo notazero com o id do arquivo prompts
-        prompt = prompts[prompts['id'] == prompt_id]
+        # prompt = prompts[prompts['id'] == prompt_id]
+        # prompt = prompts.loc[prompts['id'] == prompt_id]
+        description = prompts.loc[prompts['id'] == prompt_id, 'description'].item()
 
         # cria uma lista de parágrafos (texto motivacional) da coluna description do arquivo prompts
         regex = r"'(.*?)'"
-        for paragraph in prompt['description']:
-            paragraph = paragraph.replace('[', '').replace(']', '')
-            topic_paragraphs = re.findall(regex, paragraph)
+        topic_paragraphs = re.findall(regex, description.replace('[', '').replace(']', ''))
+        # print(topic_paragraphs)
 
         similarities = []  # Lista para armazenar as similaridades
 
         # calcula a similaridade cada parágrafo do texto motivacional com cada parágrafo da redação
         for p in topic_paragraphs:
-            for paragraphs_essay in notas_zero['essay']:
-                for paragraph_essay in paragraphs_essay:
-                    snt1_vec, snt2_vec = features.sent_to_vec(p, paragraph_essay)
-                    similarity = cosine_similarity(snt1_vec, snt2_vec)
-                    similarities.append(similarity)
-    
+            for paragraph_essay in row['essay']:
+                # for paragraph_essay in paragraphs_essay:
+                snt1_vec, snt2_vec = features.sent_to_vec(p, paragraph_essay)
+                similarity = cosine_similarity(snt1_vec, snt2_vec)
+                similarities.append(similarity)
+
     # Criar um DataFrame com os resultados
     df_results = pd.DataFrame({'Similarity': similarities})
     
