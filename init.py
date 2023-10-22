@@ -1,5 +1,7 @@
 from math import e
 import re
+from statistics import StatisticsError, mean
+from numpy import true_divide
 import pandas as pd
 
 from features import Features
@@ -18,6 +20,9 @@ if __name__ == "__main__":
     # type=2 -> TF-IDF features
     features = Features(type=2)
 
+    # Criar um DataFrame com os resultados
+    df_results = pd.DataFrame(columns=['similarity'])
+
     # Itera sobre todas as linhas do arquivo notazero
     for index, row in notas_zero.iterrows():
         # pega o tópico das redações
@@ -35,16 +40,20 @@ if __name__ == "__main__":
 
         similarities = []  # Lista para armazenar as similaridades
 
-        # calcula a similaridade cada parágrafo do texto motivacional com cada parágrafo da redação
+        # calcula a similaridade de cada parágrafo do texto motivacional com cada parágrafo da redação
         for p in topic_paragraphs:
             for paragraph_essay in row['essay']:
                 # for paragraph_essay in paragraphs_essay:
                 snt1_vec, snt2_vec = features.sent_to_vec(p, paragraph_essay)
                 similarity = cosine_similarity(snt1_vec, snt2_vec)
                 similarities.append(similarity)
-
-    # Criar um DataFrame com os resultados
-    df_results = pd.DataFrame({'Similarity': similarities})
+        
+        try:
+            # calcula a média de similaridade
+            df_results.loc[len(df_results)] = {'similarity': mean(similarities)}
+        except StatisticsError:
+            # verificar porque alguns valores estão zerados
+            df_results.loc[len(df_results)] = {'similarity': 0}
     
     # Salvar o DataFrame em um arquivo CSV
     df_results.to_csv('resultadosinit.csv', index=False)
