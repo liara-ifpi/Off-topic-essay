@@ -5,7 +5,7 @@ import openpyxl
 df = pd.read_csv('diferenca/resultadoszero.csv')
 
 # Calcular as métricas
-diff_abs_media = df['similarity'].diff().abs().mean()
+diff_abs_media = df['similarity'].abs().mean()
 diff_quadratica_media = (df['similarity'].diff()**2).mean()
 diff_maxima = df['similarity'].diff().abs().max()
 
