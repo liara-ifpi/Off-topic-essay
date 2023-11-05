@@ -6,12 +6,13 @@ import pandas as pd
 
 from features import Features
 from similarity import cosine_similarity
-from util import read_notazero, read_prompts
+from util import read_nota, read_prompts
 
 
 if __name__ == "__main__":
     # dataframes para os aruivos essay-br e prompts no diretório essays
-    notas_zero = read_notazero()
+   # notas_zero = read_notazero()
+    notas_sim = read_nota()
     #notas_mil = read_notamil()
     prompts = read_prompts()
 
@@ -25,7 +26,7 @@ if __name__ == "__main__":
     df_results = pd.DataFrame(columns=['similarity'])
 
     # Itera sobre todas as linhas do arquivo notazero
-    for index, row in notas_zero.iterrows():
+    for index, row in notas_sim.iterrows():
         # pega o tópico das redações
         prompt_id = row['prompt']
 
@@ -57,4 +58,4 @@ if __name__ == "__main__":
             df_results.loc[len(df_results)] = {'similarity': 0}
     
     # Salvar o DataFrame em um arquivo CSV
-    df_results.to_csv('resultadoszero.csv', index=False)
+    df_results.to_csv('resultado01.csv', index=False)
