@@ -1,7 +1,6 @@
 from math import e
 import re
 from statistics import StatisticsError, mean
-from numpy import true_divide
 import pandas as pd
 
 from features import Features
@@ -20,7 +19,9 @@ if __name__ == "__main__":
     # type=0 -> boolean features
     # type=1 -> TF features
     # type=2 -> TF-IDF features
-    features = Features(type=2)
+    # type=3 -> Embeddings
+    type = 3
+    features = Features(type)
 
     # Criar um DataFrame com os resultados
     df_results = pd.DataFrame(columns=['similarity'])
@@ -46,9 +47,12 @@ if __name__ == "__main__":
         for p in topic_paragraphs:
             for paragraph_essay in row['essay']:
                 # for paragraph_essay in paragraphs_essay:
-                snt1_vec, snt2_vec = features.sent_to_vec(p, paragraph_essay)
-                similarity = cosine_similarity(snt1_vec, snt2_vec)
-                similarities.append(similarity)
+                if type == 3:
+                    similarities.append(features.sent_to_vec(p, paragraph_essay, type))
+                else:    
+                    snt1_vec, snt2_vec = features.sent_to_vec(p, paragraph_essay, 0)
+                    similarity = cosine_similarity(snt1_vec, snt2_vec)
+                    similarities.append(similarity)
         
         try:
             # calcula a média de similaridade
@@ -58,4 +62,4 @@ if __name__ == "__main__":
             df_results.loc[len(df_results)] = {'similarity': 0}
     
     # Salvar o DataFrame em um arquivo CSV
-    df_results.to_csv('resultado01.csv', index=False)
+    df_results.to_csv('resultado_wmdistance.csv', index=False)
