@@ -25,6 +25,7 @@ class Features:
         else:
             # model = KeyedVectors.load_word2vec_format(path, binary=True, unicode_errors='ignore')
             # model.save(path)
+            # pip install gensim
             self.vector = KeyedVectors.load('embedding/embeddings', mmap='r')
             
     
