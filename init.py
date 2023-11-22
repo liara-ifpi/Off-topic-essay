@@ -5,14 +5,14 @@ import pandas as pd
 
 from features import Features
 from similarity import cosine_similarity
-from util import read_nota, read_prompts
+from util import read_notamil, read_prompts
 
 
 if __name__ == "__main__":
     # dataframes para os aruivos essay-br e prompts no diretório essays
-   # notas_zero = read_notazero()
-    notas_sim = read_nota()
-    #notas_mil = read_notamil()
+    #notas_zero = read_notazero()
+    #notas_sim = read_nota()
+    notas_mil = read_notamil()
     prompts = read_prompts()
 
     # Instancia a classe Features responsável por transformar uma sentença em um vetor
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     df_results = pd.DataFrame(columns=['similarity'])
 
     # Itera sobre todas as linhas do arquivo notazero
-    for index, row in notas_sim.iterrows():
+    for index, row in notas_mil.iterrows():
         # pega o tópico das redações
         prompt_id = row['prompt']
 
@@ -62,4 +62,4 @@ if __name__ == "__main__":
             df_results.loc[len(df_results)] = {'similarity': 0}
     
     # Salvar o DataFrame em um arquivo CSV
-    df_results.to_csv('resultado_wmdistance.csv', index=False)
+    df_results.to_csv('resultados_mil_wmdistance.csv', index=False)
