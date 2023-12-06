@@ -20,7 +20,8 @@ if __name__ == "__main__":
     # type=1 -> TF features
     # type=2 -> TF-IDF features
     # type=3 -> Embeddings
-    type = 3
+    # type=4 -> Sentence Embeddings
+    type = 4
     features = Features(type)
 
     # Criar um DataFrame com os resultados
@@ -48,7 +49,10 @@ if __name__ == "__main__":
             for paragraph_essay in row['essay']:
                 # for paragraph_essay in paragraphs_essay:
                 if type == 3:
-                    similarities.append(features.sent_to_vec(p, paragraph_essay, type))
+                    similarities.append(features.sent_to_vec(p, paragraph_essay, type, cos=True))
+                elif type == 4:
+                    features.sent_to_vec(p, paragraph_essay, 4)
+                    
                 else:    
                     snt1_vec, snt2_vec = features.sent_to_vec(p, paragraph_essay, 0)
                     similarity = cosine_similarity(snt1_vec, snt2_vec)
@@ -62,4 +66,4 @@ if __name__ == "__main__":
             df_results.loc[len(df_results)] = {'similarity': 0}
     
     # Salvar o DataFrame em um arquivo CSV
-    df_results.to_csv('resultados_mil_wmdistance.csv', index=False)
+    df_results.to_csv('resultados_mil_cos_embeddings.csv', index=False)
