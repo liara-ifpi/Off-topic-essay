@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from gensim.models import KeyedVectors
 
-from util import read_notamil, preprocess
+from util import read_notazero, preprocess
 from scipy import spatial
 from sentence_transformers import SentenceTransformer, util
 

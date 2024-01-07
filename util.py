@@ -16,15 +16,15 @@ def read_corpus():
     return pd.read_csv(os.path.join(path, 'essay-br.csv'), converters={'essay': eval, 'competence': eval})
 
 
-#def read_notazero():
-  # '''Lê o arquivo notazero e retorna um dataframe'''
-   #return pd.read_csv(os.path.join(path, 'notazero.csv'), converters={'essay': eval, 'competence': eval})
-
-
-
-def read_notamil():
+def read_notazero():
     '''Lê o arquivo notazero e retorna um dataframe'''
-    return pd.read_csv(os.path.join(path, 'notamil.csv'), converters={'essay': eval, 'competence': eval})
+    return pd.read_csv(os.path.join(path, 'notazero.csv'), converters={'essay': eval, 'competence': eval})
+
+
+
+#def read_notamil():
+   # '''Lê o arquivo notazero e retorna um dataframe'''
+   # return pd.read_csv(os.path.join(path, 'notamil.csv'), converters={'essay': eval, 'competence': eval})
 
 
 #def read_nota():
