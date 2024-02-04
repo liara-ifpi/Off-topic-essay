@@ -22,9 +22,9 @@ def read_notazero():
 
 
 
-#def read_notamil():
-   # '''Lê o arquivo notazero e retorna um dataframe'''
-   # return pd.read_csv(os.path.join(path, 'notamil.csv'), converters={'essay': eval, 'competence': eval})
+def read_notamil():
+   '''Lê o arquivo notazero e retorna um dataframe'''
+   return pd.read_csv(os.path.join(path, 'notamil.csv'), converters={'essay': eval, 'competence': eval})
 
 
 #def read_nota():
@@ -35,7 +35,7 @@ def read_notazero():
 def preprocess(snt1, snt2):
     '''Tokeniza as sentenças e retorna a lista de tokens
     pip install nltk
-    
+
     python
     import nltk
     download('punk')
