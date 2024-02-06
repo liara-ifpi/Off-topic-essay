@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from gensim.models import KeyedVectors
 
-from util import read_notazero, preprocess
+from util import read_corpus, preprocess
 from scipy import spatial
 from sentence_transformers import SentenceTransformer, util
 
@@ -40,6 +40,9 @@ class Features:
             if cos:
                 return self.cosine_distance_embeddings(tokens1, tokens2)
             else:
+                if isinstance(self.vector, (CountVectorizer, TfidfVectorizer)):
+                    if not hasattr(self.vector, 'vocabulary_'):
+                        self.vector.fit_transform([snt1, snt2])
                 return self.vector.wmdistance(tokens1, tokens2)
         elif type == 4:
             
@@ -48,12 +51,15 @@ class Features:
             return util.cos_sim(embeddings_stn1, embeddings_stn2)[0][0].item()
             
         else:
-            snt_vector = self.vector.fit_transform([snt1, snt2])
-            return snt_vector.toarray()
+            if isinstance(self.vector, (CountVectorizer, TfidfVectorizer)):
+                if not hasattr(self.vector, 'vocabulary_'):
+                    self.vector.fit_transform([snt1, snt2])
+                snt_vector = self.vector.transform([snt1, snt2]).toarray()
+                return snt_vector
     
 
     def cosine_distance_embeddings(self, tokens1, tokens2):
-        vector1 = np.mean([self.vector[token] if token in self.vector.key_to_index else 0.0 for token in tokens1], axis=0)
-        vector2 = np.mean([self.vector[token] if token in self.vector.key_to_index else 0.0 for token in tokens2], axis=0)
+        vector1 = np.mean([self.vector[token] for token in tokens1 if token in self.vector.key_to_index], axis=0).ravel()
+        vector2 = np.mean([self.vector[token] for token in tokens2 if token in self.vector.key_to_index], axis=0).ravel()
         return 1 - spatial.distance.cosine(vector1, vector2)
 
