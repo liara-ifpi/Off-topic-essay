@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # type=2 -> TF-IDF features
     # type=3 -> Embeddings
     # type=4 -> Sentence Embeddings
-    type = 3
+    type = 4
     features = Features(type)
 
     # Criar um DataFrame com os resultados
@@ -66,4 +66,4 @@ if __name__ == "__main__":
             df_results.loc[len(df_results)] = {'similarity': 0}
 
     # Salvar o DataFrame em um arquivo CSV
-    df_results.to_csv('resultados_development_emb.csv', index=False)
+    df_results.to_csv('resultados_training_set.csv', index=False)

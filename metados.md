@@ -8,7 +8,7 @@
 6. **Fuga à estrutura textual:** A redação do ENEM deve seguir uma estrutura dissertativo-argumentativa, composta por introdução, desenvolvimento e conclusão. Ignorar essa estrutura pode resultar em nota zero.
 7. **Redação em forma de poema ou narração:** O ENEM exige uma redação no formato dissertativo-argumentativo. Portanto, redações em forma de poema, narração ou outro gênero textual não serão avaliadas e receberão nota zero.
 
-# Cartilha 
+# Cartilha
 
 Segundo a cartilha do enem 2023, as razães para se atribuir nota zero em uma redação :
 
@@ -29,3 +29,12 @@ designado para a assinatura do participante;
 • texto predominante ou integralmente escrito em língua estrangeira;
 • folha de redação em branco, mesmo que haja texto escrito na folha de rascunho;
 • texto ilegível, que impossibilite sua leitura por dois avaliadores independentes.*
+
+# Distribuição
+
+no essays-results tem 83 notas zero, e 4489 notas com pontuacão 1.
+
+no training-results tem 57 notas zero, 3143 notas com pontuacão 1.
+
+development-results 16 notas zero, 672 notas com pontuacão 1.
+testing-results 12 notas zero, 676 notas com pontuacão 1.

@@ -28,7 +28,7 @@ def read_corpus():
 
 def read_nota():
     '''Lê o arquivo notazero e retorna um dataframe'''
-    return pd.read_csv(os.path.join(path, 'development.csv'), converters={'essay': eval, 'competence': eval})
+    return pd.read_csv(os.path.join(path, 'training.csv'), converters={'essay': eval, 'competence': eval})
 
 
 def preprocess(snt1, snt2):

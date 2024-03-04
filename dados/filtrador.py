@@ -5,16 +5,16 @@ import pandas as pd
 
 
 # tabela = pd.read_excel("essay-br.xlsx", engine='openpyxl') # variavel recebe a planilha junto com outra biblioteca para leitura e modificaçao
-tabela = pd.read_csv("essays/essay-br.csv", converters={'essay': eval, 'competence': eval}) # variavel recebe a planilha junto com outra biblioteca para leitura e modificaçao
+tabela = pd.read_csv("essays/testing-results.csv", converters={'essay': eval, 'competence': eval}) # variavel recebe a planilha junto com outra biblioteca para leitura e modificaçao
 
-filtrados = tabela['score'] == 0 # a variavel filtrados recebe a tabela com parametros 
+filtrados = tabela['score'] == 1 # a variavel filtrados recebe a tabela com parametros 
 
 
 pd.get_option('display.max_rows')
-pd.set_option('display.max_row', 100) # aumenta o numero de colunas a serem visualisadas
+pd.set_option('display.max_row', 4000) # aumenta o numero de colunas a serem visualisadas
 
 print("dados filtrados:")
 print(tabela[filtrados])
 
 # tabela[filtrados].to_excel('filtrados.xlsx', index=False) # salva e cria o artivro em xlsx
-tabela[filtrados].to_csv('notazero.csv', index=False) # salva e cria o artivro em csv
+tabela[filtrados].to_csv('nota.csv', index=False) # salva e cria o artivro em csv

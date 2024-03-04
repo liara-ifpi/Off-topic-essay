@@ -30,7 +30,7 @@ def processar_valores(valores, indice_coluna):
     return nova_linha
 
 # Exemplo de uso
-entrada_csv = 'essays/essay-br.csv'
-saida_csv = 'essay.csv'
+entrada_csv = 'essays/development.csv'
+saida_csv = 'results.csv'
 coluna_analisada = 'score' 
 processar_csv(entrada_csv, saida_csv, coluna_analisada)
