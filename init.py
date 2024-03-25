@@ -67,3 +67,7 @@ if __name__ == "__main__":
 
     # Salvar o DataFrame em um arquivo CSV
     df_results.to_csv('resultados_training_set.csv', index=False)
+
+
+
+
