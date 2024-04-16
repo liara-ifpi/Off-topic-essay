@@ -19,7 +19,7 @@ Passero, G.; Ferreira, R.; Filho, A.; Dazzi, R. Off-Topic Essay Detection: A Sys
 
 Jurafsky, D.; Martin, J. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition. 2. ed. Stanford: Stanford University, 2008. Disponível em: [https://web.stanford.edu/~jurafsky/slp3/ed3book.pdf](https://web.stanford.edu/~jurafsky/slp3/ed3book.pdf). Acesso em: 16 abr. 2024. , 2008.
 
-Jeffrey Pennington, Richard Socher, and Christopher Manning. 2014. GloVe: Global Vectors for Word Representation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1532–1543, Doha, Qatar. Association for Computational Linguistics.
+Jeffrey Pennington, Richard Socher, and Christopher Manning. 2014. GloVe: Global Vectors for Word Representation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1532–1543, Doha, Qatar. Association for Computational Linguistics. Disponível em: 10.3115/v1/D14-1162
 
 Pennington, J.; Socher, R.; Manning, C. GloVe: Global Vectors for Word Representation. In: Moschitti, A.; Pang, B.; Daelemans, W. (Eds.). Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), p. 1532-1543, Doha, Qatar, 2014. Association for Computational Linguistics. Disponível em: [https://aclanthology.org/D14-1162](https://aclanthology.org/D14-1162).
 
