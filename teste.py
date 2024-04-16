@@ -4,9 +4,9 @@ import pandas as pd
 # Carregar os dados
 X = pd.read_csv('essays/essays-results-x.csv')
 y = pd.read_csv('essays/essays-results-y.csv')
-
+print(y)
 # Criar uma instância do classificador SVM
-clf = svm.SVC()
+clf = svm.SVC(kernel='linear')
 
 # Treinar o modelo SVM
 clf.fit(X, y)
