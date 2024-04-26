@@ -1,3 +1,4 @@
+
 from nltk import tokenize
 from nltk.corpus import stopwords
 import pandas as pd
@@ -16,6 +17,9 @@ def read_corpus():
     return pd.read_csv(os.path.join(path, 'essay-br.csv'), converters={'essay': eval, 'competence': eval})
 
 
+def read_results(corpus):
+    return pd.read_csv(corpus+'.csv')
+
 #def read_notazero():
    # '''Lê o arquivo notazero e retorna um dataframe'''
    # return pd.read_csv(os.path.join(path, 'notazero.csv'), converters={'essay': eval, 'competence': eval})
@@ -26,9 +30,9 @@ def read_corpus():
   # '''Lê o arquivo notazero e retorna um dataframe'''
   # return pd.read_csv(os.path.join(path, 'notamil.csv'), converters={'essay': eval, 'competence': eval})
 
-def read_nota():
+def read_set(corpus):
     '''Lê o arquivo notazero e retorna um dataframe'''
-    return pd.read_csv(os.path.join(path, 'training.csv'), converters={'essay': eval, 'competence': eval})
+    return pd.read_csv(os.path.join(path, corpus+'.csv'), converters={'essay': eval, 'competence': eval})
 
 
 def preprocess(snt1, snt2):
@@ -43,3 +47,12 @@ def preprocess(snt1, snt2):
     tokens1 = tokenize.word_tokenize(snt1, language='portuguese')
     tokens2 = tokenize.word_tokenize(snt2, language='portuguese')
     return [t.lower() for t in tokens1 if t not in stopwords.words(u'portuguese')], [t.lower() for t in tokens2 if t not in stopwords.words(u'portuguese')],
+
+
+def count_labels():
+    df = read_results('resultados_development')
+    print(df['label'].value_counts())
+
+
+if __name__ == "__main__":
+    count_labels()

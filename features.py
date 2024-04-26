@@ -1,65 +1,65 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from gensim.models import KeyedVectors
 
+from similarity import cosine_similarity, cosine_distance_embeddings
 from util import read_corpus, preprocess
-from scipy import spatial
-from sentence_transformers import SentenceTransformer, util
 
-import numpy as np
+from sentence_transformers import SentenceTransformer, util
 
 
 class Features:
 
-    def __init__(self, type) -> None:
+    def __init__(self) -> None:
         # boolean features
-        if type == 0:
-            self.vector = CountVectorizer(binary=True)
+        # if type == 0:
+        self.count_vector = CountVectorizer(binary=True)
         
         # tf features
-        elif type == 1:
-            self.vector = TfidfVectorizer(use_idf=False)
+        # elif type == 1:
+        self.tf_vector = TfidfVectorizer(use_idf=False)
         
         # tf-idf features
-        elif type == 2:
-            self.vector = TfidfVectorizer()
+        # elif type == 2:
+        self.tfidf_vector = TfidfVectorizer()
         
-        elif type == 3:
+        # elif type == 3:
             # model = KeyedVectors.load_word2vec_format(path, binary=True, unicode_errors='ignore')
             # model.save(path)
             # pip install gensim
-            self.vector = KeyedVectors.load('embedding/embeddings', mmap='r')
+        self.embeddings_vector = KeyedVectors.load('embedding/embeddings', mmap='r')
         
-        else:
+        # else:
             # pip install sentence-transformers
-            self.vector = SentenceTransformer('distiluse-base-multilingual-cased-v1')
+        self.st_vector = SentenceTransformer('distiluse-base-multilingual-cased-v1')
             
     
-    def sent_to_vec(self, snt1, snt2, type, cos=None):
-        if type == 3:
+    def sent_to_vec(self, snt1, snt2, type, cos=True):
+
+        if type == 0:
+            if not hasattr(self.count_vector, 'vocabulary_'):
+                self.count_vector.fit_transform([snt1, snt2])
+            snt1_vector, snt2_vector = self.count_vector.transform([snt1, snt2]).toarray()
+            return cosine_similarity(snt1_vector, snt2_vector)
+        elif type == 1:
+            if not hasattr(self.tf_vector, 'vocabulary_'):
+                self.tf_vector.fit_transform([snt1, snt2])
+            snt1_vector, snt2_vector = self.tf_vector.transform([snt1, snt2]).toarray()
+            return cosine_similarity(snt1_vector, snt2_vector)
+        elif type == 2:
+            if not hasattr(self.tfidf_vector, 'vocabulary_'):
+                self.tfidf_vector.fit_transform([snt1, snt2])
+            snt1_vector, snt2_vector = self.tfidf_vector.transform([snt1, snt2]).toarray()
+            return cosine_similarity(snt1_vector, snt2_vector)
+        elif type == 3:
             tokens1, tokens2 = preprocess(snt1, snt2)
             if cos:
-                return self.cosine_distance_embeddings(tokens1, tokens2)
+                return cosine_distance_embeddings(self.embeddings_vector, tokens1, tokens2)
             else:
-                if isinstance(self.vector, (CountVectorizer, TfidfVectorizer)):
-                    if not hasattr(self.vector, 'vocabulary_'):
-                        self.vector.fit_transform([snt1, snt2])
-                return self.vector.wmdistance(tokens1, tokens2)
+                return self.embeddings_vector.wmdistance(tokens1, tokens2)
         elif type == 4:
             
-            embeddings_stn1 = self.vector.encode(snt1, convert_to_tensor=True)
-            embeddings_stn2 = self.vector.encode(snt2, convert_to_tensor=True)
+            embeddings_stn1 = self.st_vector.encode(snt1, convert_to_tensor=True)
+            embeddings_stn2 = self.st_vector.encode(snt2, convert_to_tensor=True)
             return util.cos_sim(embeddings_stn1, embeddings_stn2)[0][0].item()
-            
-        else:
-            if isinstance(self.vector, (CountVectorizer, TfidfVectorizer)):
-                if not hasattr(self.vector, 'vocabulary_'):
-                    self.vector.fit_transform([snt1, snt2])
-                snt_vector = self.vector.transform([snt1, snt2]).toarray()
-                return snt_vector
-    
-
-    def cosine_distance_embeddings(self, tokens1, tokens2):
-        vector1 = np.mean([self.vector[token] for token in tokens1 if token in self.vector.key_to_index], axis=0).ravel()
-        vector2 = np.mean([self.vector[token] for token in tokens2 if token in self.vector.key_to_index], axis=0).ravel()
-        return 1 - spatial.distance.cosine(vector1, vector2)
+        
 
