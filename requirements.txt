@@ -1,2 +1,10 @@
 scikit-learn
 pandas
+imbalanced-learn
+gensim
+numpy
+tqdm
+nltk
+sentence-transformers
+scipy
+matplotlib
