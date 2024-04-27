@@ -1,9 +1,9 @@
-
-
+import matplotlib.pyplot as plt
 from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
-from sklearn.metrics import balanced_accuracy_score, classification_report, f1_score
+from sklearn.metrics import balanced_accuracy_score, classification_report, confusion_matrix, \
+    ConfusionMatrixDisplay
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -30,6 +30,9 @@ y_pred = clf.predict(X_test)
 
 print(classification_report(y_test, y_pred))
 
-print(f1_score(y_test, y_pred, average='weighted'))
+print(f'Acurácia balanceada: {balanced_accuracy_score(y_test, y_pred)}')
 
-print(balanced_accuracy_score(y_test, y_pred))
+cm = confusion_matrix(y_test, y_pred, labels=clf.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
+disp.plot()
+plt.show()
