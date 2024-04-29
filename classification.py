@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from imblearn.metrics import classification_report_imbalanced
 from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
@@ -23,16 +24,19 @@ y = training_corpus['label']
 ros = SMOTE(random_state=42)
 X_resampled, y_resampled = ros.fit_resample(X, y)
 
-clf = GradientBoostingClassifier()
+clf = GradientBoostingClassifier(random_state=42)
 clf.fit(X_resampled, y_resampled)
 
 y_pred = clf.predict(X_test)
 
 print(classification_report(y_test, y_pred))
 
+print(classification_report_imbalanced(y_test, y_pred))
+
 print(f'Acurácia balanceada: {balanced_accuracy_score(y_test, y_pred)}')
 
 cm = confusion_matrix(y_test, y_pred, labels=clf.classes_)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
-disp.plot()
-plt.show()
+print(cm)
+# disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
+# disp.plot()
+# plt.show()
