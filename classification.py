@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 from imblearn.metrics import classification_report_imbalanced
 from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn import svm
+from sklearn import svm, tree
+from sklearn.linear_model import Perceptron
 from sklearn.metrics import balanced_accuracy_score, classification_report, confusion_matrix, \
     ConfusionMatrixDisplay
 from sklearn.naive_bayes import GaussianNB
@@ -11,6 +12,7 @@ from sklearn.tree import DecisionTreeClassifier
 from util import read_results
 from imblearn.over_sampling import RandomOverSampler, SMOTE, ADASYN
 
+#pip install imbalanced-learn
 
 training_corpus = read_results('resultados_training')
 testing_corpus = read_results('resultados_testing')
@@ -24,7 +26,7 @@ y = training_corpus['label']
 ros = SMOTE(random_state=42)
 X_resampled, y_resampled = ros.fit_resample(X, y)
 
-clf = GradientBoostingClassifier(random_state=42)
+clf = tree.DecisionTreeClassifier(random_state=42)
 clf.fit(X_resampled, y_resampled)
 
 y_pred = clf.predict(X_test)
