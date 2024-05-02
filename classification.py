@@ -1,18 +1,26 @@
 import matplotlib.pyplot as plt
 from imblearn.metrics import classification_report_imbalanced
-from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier,  BaggingClassifier
+from sklearn.linear_model import LogisticRegression,SGDClassifier, Perceptron
 from sklearn import svm, tree
-from sklearn.linear_model import Perceptron
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import balanced_accuracy_score, classification_report, confusion_matrix, \
     ConfusionMatrixDisplay
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neural_network import MLPClassifier
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from util import read_results
+from sklearn.naive_bayes import BernoulliNB, CategoricalNB, GaussianNB
 from imblearn.over_sampling import RandomOverSampler, SMOTE, ADASYN
 
 #pip install imbalanced-learn
+
+import numpy as np
+np.random.seed(42)
+
 
 training_corpus = read_results('resultados_training')
 testing_corpus = read_results('resultados_testing')
@@ -26,7 +34,8 @@ y = training_corpus['label']
 ros = SMOTE(random_state=42)
 X_resampled, y_resampled = ros.fit_resample(X, y)
 
-clf = tree.DecisionTreeClassifier(random_state=42)
+clf =  BernoulliNB()
+
 clf.fit(X_resampled, y_resampled)
 
 y_pred = clf.predict(X_test)
