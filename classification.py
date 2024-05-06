@@ -1,8 +1,13 @@
 import matplotlib.pyplot as plt
 from imblearn.metrics import classification_report_imbalanced
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
 from sklearn.ensemble import GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier,  BaggingClassifier
-from sklearn.linear_model import LogisticRegression,SGDClassifier, Perceptron
-from sklearn import svm, tree
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.linear_model import LogisticRegression,SGDClassifier, Perceptron, PassiveAggressiveClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn import svm, tree, linear_model
+from sklearn.svm import SVC,  NuSVC,  LinearSVC
+from sklearn.kernel_ridge import KernelRidge
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
@@ -12,6 +17,7 @@ from sklearn.metrics import balanced_accuracy_score, classification_report, conf
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier, RadiusNeighborsClassifier, NearestCentroid, NeighborhoodComponentsAnalysis
 from util import read_results
 from sklearn.naive_bayes import BernoulliNB, CategoricalNB, GaussianNB
 from imblearn.over_sampling import RandomOverSampler, SMOTE, ADASYN
@@ -34,7 +40,7 @@ y = training_corpus['label']
 ros = SMOTE(random_state=42)
 X_resampled, y_resampled = ros.fit_resample(X, y)
 
-clf =  BernoulliNB()
+clf =   QuadraticDiscriminantAnalysis()
 
 clf.fit(X_resampled, y_resampled)
 
