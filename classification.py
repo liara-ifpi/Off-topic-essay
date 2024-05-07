@@ -40,7 +40,7 @@ y = training_corpus['label']
 ros = SMOTE(random_state=42)
 X_resampled, y_resampled = ros.fit_resample(X, y)
 
-clf =   QuadraticDiscriminantAnalysis()
+clf = QuadraticDiscriminantAnalysis()
 
 clf.fit(X_resampled, y_resampled)
 
