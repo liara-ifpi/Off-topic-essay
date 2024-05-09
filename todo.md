@@ -2,7 +2,7 @@
 
 - [ ] Avaliar os algoritmos de classificação do sckit-learn
 - [ ] Realizar a seleção de features
-- [ ] Realizar o balanceamento alterando o tema da redação
+- [x] Realizar o balanceamento alterando o tema da redação
 - [ ] Analisar se os resultados melhoraram
 - [ ] Implementar métodos da literatura (Passero et al., 2019 e BERT)
 - [ ] Comparar os resultados
