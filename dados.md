@@ -68,6 +68,20 @@ Acurácia balanceada: 0.48175084175084176
 [[  1  10]
  [ 86 589]]
 
+# Melhores modelos de classificação
+
+**Perceptron**
+Acurácia balanceada: 0.5453872053872054
+
+**GradientBoostingClassifier**
+Acurácia balanceada: 0.5235016835016835
+
+**RadiusNeighborsClassifier**
+Acurácia balanceada: 0.5044444444444445
+
+**BernoulliNB**
+Acurácia balanceada: 0.5022222222222222
+
 # 1.1. Linear Models
 
 ## Perceptron
@@ -91,7 +105,6 @@ avg / total       0.97      0.28      0.81      0.42      0.47      0.21       6
 Acurácia balanceada: 0.5453872053872054
 [[  9   2]
  [491 184]]
-
 
 # 1.3. Kernel ridge regression
 
