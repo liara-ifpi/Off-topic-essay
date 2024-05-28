@@ -18,9 +18,11 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier, RadiusNeighborsClassifier, NearestCentroid, NeighborhoodComponentsAnalysis
+from xgboost import XGBClassifier
 from util import read_results
 from sklearn.naive_bayes import BernoulliNB, CategoricalNB, GaussianNB
 from imblearn.over_sampling import RandomOverSampler, SMOTE, ADASYN
+from imblearn.under_sampling import RandomUnderSampler
 
 #pip install imbalanced-learn
 
@@ -31,18 +33,20 @@ np.random.seed(42)
 training_corpus = read_results('resultados_training')
 testing_corpus = read_results('resultados_testing')
 
-X_test = testing_corpus[['boolean', 'tf', 'tfidf', 'embeddings', 'st', 'wmd']]
+X_test = testing_corpus[['boolean', 'tf', 'embeddings', 'st', 'wmd']]
 y_test = testing_corpus['label']
 
-X = training_corpus[['boolean', 'tf', 'tfidf', 'embeddings', 'st', 'wmd']]
+X = training_corpus[['boolean', 'tf', 'embeddings', 'st', 'wmd']]
 y = training_corpus['label']
 
-ros = SMOTE(random_state=42)
+ros = RandomUnderSampler(random_state=42)
 X_resampled, y_resampled = ros.fit_resample(X, y)
 
-clf = QuadraticDiscriminantAnalysis()
-
+clf = RandomForestClassifier()
+# clf = XGBClassifier(n_estimators=2, max_depth=100)
 clf.fit(X_resampled, y_resampled)
+
+print(clf.feature_importances_)
 
 y_pred = clf.predict(X_test)
 
