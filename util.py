@@ -1,4 +1,5 @@
 
+import random
 from nltk import tokenize
 from nltk.corpus import stopwords
 import pandas as pd
@@ -14,7 +15,7 @@ def read_prompts():
 
 def read_corpus():
     '''Lê o arquivo essay-br e retorna um dataframe'''
-    return pd.read_csv(os.path.join(path, 'essay-br.csv'), converters={'essay': eval, 'competence': eval})
+    return pd.read_csv(os.path.join(path, 'essay-br-2.csv'), converters={'essay': eval, 'competence': eval})
 
 
 def read_results(corpus):
@@ -50,8 +51,49 @@ def preprocess(snt1, snt2):
 
 
 def count_labels():
-    df = read_results('resultados_development')
-    print(df['label'].value_counts())
+
+    df = read_results('balanced-training')
+    print(df['score'].value_counts())
+
+
+def replace_prompt(x):
+    value = random.randint(0, 85)
+    while value == x:
+        value = random.randint(0, 85)
+    return value
+
+
+def balancing():
+    # 1543 + 56 = 1599
+    # numbers_of_zero = 82
+    df = read_results('essays/training')
+    # df1 = read_results('essay-on-topic')
+    df_zeros = df[df['score'] == 0]
+
+    df_ontopic = df[df['score'] > 0]
+    df_sample = df_ontopic.sample(1543, random_state=42)
+
+    df_offtopic = df_ontopic[df_ontopic.index.isin(df_sample.index) == False]
+    # print(df_offtopic)
+
+
+    # print(df_sample)
+    df_sample['prompt'] = df_sample['prompt'].apply(replace_prompt)
+    df_sample['score'] = df_sample['score'].fillna(0, inplace=True)
+    # print(df_sample)
+
+
+
+    # df1 = df.sample(4488)
+    balanced = [df_zeros, df_sample, df_offtopic]
+    result = pd.concat(balanced)
+
+    result.to_csv('balanced-training.csv', index=False)
+
+
+
+    # print(type(score))
+    # prompt = df['prompt']
 
 
 if __name__ == "__main__":
