@@ -15,7 +15,7 @@ def read_prompts():
 
 def read_corpus():
     '''Lê o arquivo essay-br e retorna um dataframe'''
-    return pd.read_csv(os.path.join(path, 'essay-br-2.csv'), converters={'essay': eval, 'competence': eval})
+    return pd.read_csv(os.path.join(path, 'essay-br.csv'), converters={'essay': eval, 'competence': eval})
 
 
 def read_results(corpus):
