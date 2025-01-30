@@ -2,15 +2,7 @@
 
 ## Reference
 
-```
-@inproceedings{bracis,
-author    = {Joyce M. Silva and Rafael T. Anchiêta and Rogério F. de Sousa and Raimundo S. Moura},
-title  = {Investigating Methods to Detect Off-Topic Essays},
-booktitle = {Anais da XIII Brazilian Conference on Intelligent Systems},
-year    = {2024},
-publisher = {SBC},                                                                                             
-}
-```
+`@InProceedings{10.1007/978-3-031-79035-5_24, author="Silva, Joyce M. and Anchi{`
 
 ## Requirements
 
