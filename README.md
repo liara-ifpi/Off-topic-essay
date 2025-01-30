@@ -3,7 +3,8 @@
 ## Reference
 
 ```
-@InProceedings{10.1007/978-3-031-79035-5_24, author="Silva, Joyce M. and Anchi{\^e}ta, Rafael T. and de Sousa, Rog{\'e}rio F. and Moura, Raimundo S.",
+@InProceedings{10.1007/978-3-031-79035-5_24,
+author="Silva, Joyce M. and Anchi{\^e}ta, Rafael T. and de Sousa, Rog{\'e}rio F. and Moura, Raimundo S.",
 editor="Paes, Aline and Verri, Filipe A. N.",
 title="Investigating Methods to Detect Off-Topic Essays",
 booktitle="Intelligent Systems",
