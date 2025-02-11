@@ -1,4 +1,7 @@
-# Off-topic-essay
+# Investigating Methods to Detect Off-Topic Essays
+
+This repository contains adversarial methods to evaluate automated essay graders. 
+For more details about the methods, we suggest consulting the [paper](https://link.springer.com/chapter/10.1007/978-3-031-79035-5_24).
 
 ## Reference
 
